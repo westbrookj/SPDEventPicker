@@ -1,0 +1,4 @@
+themes/* linguist-vendored
+jslib/bootstrap-3.3.7.min.js linguist-vendored
+jslib/jquery-3.3.1.min.js linguist-vendored
+jslib/jquery-ui-1.12.1.min.js linguist-vendored
