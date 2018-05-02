@@ -1,0 +1,228 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    display: none;
+    font-family: 'Ubuntu', sans-serif;
+    background-color: #eee;
+    margin-bottom: 0;
+}
+
+#loginButtonWrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    display: inline;
+    z-index: 9999;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+}
+
+#user {
+    padding-right: 15px;
+    padding-top: 7px;
+    color: #fff;
+    display: inline;
+}
+
+#title {
+    margin: 0 auto;
+    margin-top: 51px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+#title h1 {
+    border-top: 5px solid #b30000;
+    border-bottom: 5px solid #b30000;
+    display: inline-block;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+#result p {
+    font-weight: bold;
+}
+
+#result ul {
+    text-align: center;
+    margin: 0 auto;
+    padding: 0;
+    list-style-position: inside;
+}
+
+#result li {
+    text-align: center;
+}
+
+#videoWrapper {
+    margin: 0 auto;
+    text-align: center;
+    width: 600px;
+    border: 3.5px solid rgba(179,0,0,0.85);
+    border-radius: 10px;
+    background-color: rgba(179,0,0,0.1);
+    padding: 1%;
+}
+
+.flexbox.root {
+    height: 100%;
+}
+
+.flexbox-content {
+    flex-grow: 1;
+}
+
+/* cards for eventpicker/picker form */
+.card-row .card input[type=number] {
+    width: 40px;
+    text-align: center;
+}
+
+div#submitButton, #addMemberButton, #resetMembersButton, #loginFormButton {
+    border: 1.5px solid #b30000;
+}
+
+#memberDetails input, #memberDetails select {
+    margin-left: 5px;
+}
+
+#addMemberCard input, #addMemberCard select {
+    margin-left: 5px;
+}
+
+#updateButton, #deleteButton, #addButton, #addUserFormButton{
+    border: 1.5px solid #b30000;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+}
+
+#loginFormButton, #addUserFormButton {
+    margin-top: 10px;
+}
+
+#images {
+    margin-top: -2%;
+    text-align: center;
+}
+
+#coat {
+    width: 25%;
+    margin-right: 5%;
+}
+
+#logo {
+    width: 25%;
+}
+
+#footer {
+    background-color: #b30000;
+    border-top: 2px solid #000;
+    width: 100%;
+    height: 40px;
+    color: #fff;
+    text-align: right;
+    margin: 0;
+    margin-top: 45px;
+    display: flex;
+    flex-shrink: 0;
+    justify-content: flex-end;
+}
+
+#footer p {
+    padding: 10px;
+    margin: 0;
+}
+
+/*------------------*/
+
+/* cards for information on the page. ONLY TWO cards per line */
+.card-row {
+    margin-top: 10px;
+    display: flex;
+}
+
+.flexbox {
+    display: flex;
+    flex-direction: column;
+}
+
+.flexbox .card-row {
+    flex-direction: row;
+}
+
+.card {
+    border: 3.5px solid rgba(179,0,0,0.85);
+    border-radius: 10px;
+    background-color: rgba(179,0,0,0.1);
+    text-align: center;
+    width: 30%;
+    padding: 1%;
+}
+
+.card-row .card:first-child {
+    margin-left: 16%;
+    margin-right: 3%;
+}
+
+.card-row .card:last-child {
+    margin-right: 16%;
+    margin-left: 3%;
+}
+
+.card-row .card:only-child {
+    margin: 0 auto;
+}
+/*---------------------------*/
+
+
+/* navbar background color  */
+.navbar {
+    background-color: #b30000;
+    border-bottom: 2px solid #000;
+}
+/*-----------------------*/
+
+/* navbar button dividers */
+.navbar ul li {
+    border-right: 2px solid rgba(177,177,177,0.5);
+}
+
+.navbar ul li ul li {
+    border-bottom: 2px solid rgba(177,177,177,0.5);
+    border-right: none;
+}
+
+.navbar ul li ul li:last-child {
+    border-bottom: none;
+}
+/*-----------------------*/
+
+/* navbar button background/color */
+.navbar ul li a, .navbar ul {
+    background-color: #b30000;
+    color: #fff;
+    font-weight: bold;
+}
+/*----------------------*/
+
+/* navbar hover/opened background/color */
+.navbar ul li a:hover, .navbar ul li.dropdown.open {
+    color: #222;
+    background-color: #d30000;
+}
+
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {
+    background-color: #d30000;
+}
+/*-----------------------*/
+
+/* jQuery Button text-color */
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited, a.ui-button, a:link.ui-button, a:visited.ui-button, .ui-button {
+    color: #770000;
+    text-decoration: none;
+}
+/*-----------------------*/

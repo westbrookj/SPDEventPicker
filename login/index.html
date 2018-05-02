@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>SPD Event Picker</title>
+        
+        <!-- favicons -->
+        <link rel="apple-touch-icon" sizes="120x120" href="../images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+        <link rel="manifest" href="../images/site.webmanifest">
+        <link rel="mask-icon" href="../images/safari-pinned-tab.svg" color="#b30000">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+        
+        <!-- Ubuntu Font -->
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        
+        <!-- jQuery UI Blitzer Theme -->
+        <link rel="stylesheet" href="../themes/jquery-ui-1.12.1-blitzer.css" />
+        
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="../themes/bootstrap-3.3.7.min.css">
+        
+        <link rel="stylesheet" href="../eventPicker.css" />
+        
+        <!-- jQuery Core 3.3.1 JS -->
+        <script src="../jslib/jquery-3.3.1.min.js"></script>
+        
+        <!-- Bootstrap JS -->
+        <script src="../jslib/bootstrap-3.3.7.min.js"></script>
+        <!-- Remove jQuery Conflicts with Bootstrap -->
+        <script>
+            $.fn.bootstrapBtn = $.fn.button.noConflict();
+        </script>
+        
+        <!-- jQuery UI 1.12.1 JS -->
+        <script src="../jslib/jquery-ui-1.12.1.min.js"></script>
+        
+        <!-- globalFunctions.js -->
+        <script src="../jslib/globalFunctions.js"></script>
+    </head>
+    <body>
+        <div id="header">
+            <script>
+                verifyLogin('login');
+            </script>
+        </div>
+        <div class="flexbox root">
+            <div class="flexbox-content">
+                <div id="title">
+                    <h1>Sigma Phi Delta Event Picker</h1>
+                </div>
+                <br>
+                <div id="info" class="flexbox">
+                    <div class="card-row">
+                        <div class="card">
+                            <p>
+                                Please login to use the Event Picker web-app.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="card-row">
+                    <div class="card">
+                        <form action="../phplib/login.php" method="post">
+                            <label for="username">Username:</label>
+                            <input type="text" size="15" id="username" name="username" required />
+                            <br>
+                            <label for="password">Password:</label>
+                            <input type="password" size="15" id="password" name="password" required />
+                            <br>
+                            <input type="submit" class="spdbutton" id="loginFormButton" value="Login" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            $(document).ready(function() {
+                $('.spdbutton').button();
+                insertFooter();
+                $('form').submit(function(e) {
+                    e.preventDefault();
+                    $.ajax({
+                        type: "post",
+                        url: '/eventpicker/phplib/login.php',
+                        data: $(this).serialize(),
+                        dataType: 'json',
+                        success: function(data) {
+                            if(data.status == 'OK') {
+                                window.location = document.referrer;
+                            }else {
+                                if($('#error').length) {
+                                    $('#error').text(data.error);
+                                }else {
+                                    $('#info').append('<div class="card-row">'
+                                                        + '<div class="card">'
+                                                            + '<p id="error">' + data.error + '</p>'
+                                                        + '</div'
+                                                     + '</div>');
+                                }
+                                $('input[name=password]').val("");
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

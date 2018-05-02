@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>SPD Event Picker</title>
+        
+        <!-- favicons -->
+        <link rel="apple-touch-icon" sizes="120x120" href="../images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+        <link rel="manifest" href="../images/site.webmanifest">
+        <link rel="mask-icon" href="../images/safari-pinned-tab.svg" color="#b30000">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+        
+        <!-- Ubuntu Font -->
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        
+        <!-- jQuery UI Blitzer Theme -->
+        <link rel="stylesheet" href="../themes/jquery-ui-1.12.1-blitzer.css" />
+        
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="../themes/bootstrap-3.3.7.min.css">
+        
+        <link rel="stylesheet" href="../eventPicker.css" />
+        
+        <!-- jQuery Core 3.3.1 JS -->
+        <script src="../jslib/jquery-3.3.1.min.js"></script>
+        
+        <!-- Bootstrap JS -->
+        <script src="../jslib/bootstrap-3.3.7.min.js"></script>
+        <!-- Remove jQuery Conflicts with Bootstrap -->
+        <script>
+            $.fn.bootstrapBtn = $.fn.button.noConflict();
+        </script>
+        
+        <!-- jQuery UI 1.12.1 JS -->
+        <script src="../jslib/jquery-ui-1.12.1.min.js"></script>
+        
+        <!-- globalFunctions.js -->
+        <script src="../jslib/globalFunctions.js"></script>
+    </head>
+    <body>
+        <div id="header">
+            <script>
+                verifyLogin('adduser');
+            </script>
+        </div>
+        <div class="flexbox root">
+            <div class="flexbox-content">
+                <div id="title">
+                    <h1>Add a User</h1>
+                </div>
+                <br>
+                <div id="instructionCardRow" class="card-row">
+                    <div class="card">
+                        <p>
+                            Please fill out the form below to add a user.
+                        </p>
+                    </div>
+                </div>
+                <br>
+                <div class="flexbox">
+                    <div class="card-row">
+                        <div class="card">
+                            <form id="addUserForm" action="../phplib/addUser.php" method="post">
+                                <label for="username">Username:</label>
+                                <input type="text" size="15" placeholder="Username..." id="username" name="username" required />
+                                <br>
+                                <label for="password">Password:</label>
+                                <input type="password" size="15" placeholder="Password.." id="password" name="password" required />
+                                <br>
+                                <label for="confirm_password">Password:</label>
+                                <input type="password" size="15" placeholder="Confirm Password..." id="confirm_password" name="confirm_password" required />
+                                <br>
+                                <input type="submit" class="spdbutton" id="addUserFormButton" value="Add User" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            $(document).ready(function() {
+                $('.spdbutton').button();
+                insertFooter();
+                $('form').submit(function(e) {
+                    e.preventDefault();
+                    $.ajax({
+                        type: "post",
+                        url: '/eventpicker/phplib/addUser.php',
+                        data: $(this).serialize(),
+                        dataType: 'json',
+                        success: function(data) {
+                            var message ='';
+
+                            if(data.status == 'OK') {
+                                message = 'Successfully added the user ' + data.user + '!';
+                                $('input[name=username]').val("");
+                            }else {
+                                if(data.error.includes('Duplicate')) {
+                                    message = "User already exists!";
+                                    $('input[name=username]').val("");
+                                }else {
+                                    message = data.error;
+                                }
+                            }
+
+                            if($('#message').length) {
+                                $('#message').text(message);
+                            }else {
+                                $('#instructionCardRow').after('<div class="card-row">'
+                                                    + '<div class="card">'
+                                                        + '<p id="message">' + message + '</p>'
+                                                    + '</div'
+                                                 + '</div>');
+                            }
+
+                            $('input[name=password]').val("");
+                            $('input[name=confirm_password]').val("");
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
